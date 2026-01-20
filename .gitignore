@@ -1,0 +1,43 @@
+# Compiled files
+*.exe
+*.out
+*.class
+*.o
+*.pyc
+*.pyo
+__pycache__/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Language specific
+# Java
+*.jar
+*.war
+
+# Python
+*.egg-info/
+dist/
+build/
+venv/
+env/
+
+# C/C++
+*.so
+*.a
+
+# Node.js
+node_modules/
+package-lock.json
+
+# Input/Output test files (optional)
+input.txt
+output.txt
