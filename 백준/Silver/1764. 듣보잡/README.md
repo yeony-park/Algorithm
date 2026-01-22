@@ -28,3 +28,21 @@
 
  <p>듣보잡의 수와 그 명단을 사전순으로 출력한다.</p>
 
+
+ ---
+ ### 초기 접근
+ <code>
+ import sys
+input = sys.stdin.readline
+
+n, m = map(int, input().split())
+listen = [input().strip() for i in range(n)]
+see = [input().strip() for i in range(m)]
+not_l_s = [i for i in listen if i in see]
+
+print(len(not_l_s))
+[print(i) for i in not_l_s]
+ </code>
+1. **접근 아이디어:** 두 목록의 공통 원소를 찾아 출력할 때 포함 여부를 in으로 필터링하는 방식을 사용
+2. **막힌 부분:** list에서 in 연산은 선형 탐색(O(m))이므로, 이를 n번 반복하면서 전체가 O(n*m)으로 커져 시간초과가 발생하였다
+3. **해결 방안:** set으로 변환해 포함 검사 비용을 평균 O(1)로 줄이고, set 교집합을 사용하였고, 문제 요구대로 사전순으로 정렬하여 출력하였다
