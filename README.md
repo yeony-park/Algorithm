@@ -2,11 +2,11 @@
 ## 공부 진행 현황
 
 - ![Doing](https://img.shields.io/badge/Doing-7CB342?style=flat-square&logoColor=white)
-  [Baekjoon ↗](./Algorithm/백준/) </br>
+  [Baekjoon ↗](./백준/) </br>
   : 백준 온라인 저지 문제 풀이
 
 - ![Doing](https://img.shields.io/badge/Doing-7CB342?style=flat-square&logoColor=white)
-  [Programmers ↗](./Algorithm/프로그래머스/) </br>
+  [Programmers ↗](./프로그래머스/) </br>
   : 프로그래머스 코딩테스트 연습 문제 풀이
 
 ### References
