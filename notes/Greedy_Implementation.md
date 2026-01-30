@@ -1,4 +1,4 @@
-# 그리디 알고리즘 (Greedy)
+# ![Tag](https://img.shields.io/badge/Tag-Greedy-2ea44f) 그리디 알고리즘 (Greedy)
 
 ## 정의
 - 매 단계에서 **현재 상황에서 최선이라고 판단되는 선택**을 반복하는 방식
@@ -23,7 +23,7 @@
 
 ---
 
-# 구현 (Simulation / Brute Force)
+# ![Tag](https://img.shields.io/badge/Tag-Implementation-2ea44f) 구현 (Simulation / Brute Force)
 
 ## 구현이란?
 - 문제에서 요구하는 과정을 **그대로 코드로 옮겨** 해결하는 유형
@@ -72,9 +72,9 @@
 
 ---
 
-## Notion
-전체 노트는 아래 Notion 링크를 참고:  
-[Full notes on Notion](https://daily-archduke-be2.notion.site/2f45e249d44e80808760edcbdc08e9bd?source=copy_link)
+## More details
+[![Notion](https://img.shields.io/badge/Notion-Study%20Note-808080?logo=notion&logoColor=000000&labelColor=FFD700)](https://daily-archduke-be2.notion.site/2f45e249d44e80808760edcbdc08e9bd?source=copy_link)
 
-## Reference Links
-- 동빈나 (이코테) — [그리디 & 구현 강의 (YouTube)](https://www.youtube.com/watch?v=2zjoKjt97vQ&list=PLRx0vPvlEmdAghTr5mXQxGpHjWqSz0dgC&index=2)
+## References
+[![YouTube](https://img.shields.io/badge/YouTube-%EC%9D%B4%EC%BD%94%ED%85%8C%20%EA%B0%95%EC%9D%98-808080?logo=youtube&logoColor=FFFFFF&labelColor=FF0000)]()
+
