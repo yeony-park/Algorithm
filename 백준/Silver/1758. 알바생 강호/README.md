@@ -36,3 +36,39 @@
 
  <p>강호가 받을 수 있는 팁의 최댓값을 출력한다.</p>
 
+---
+### ✅ Success log
+#### 접근 아이디어
+* i번째(0-index)로 줄서면 실제로 받는 팁은 tips[i] - i가 됨
+* 총합을 최대로 하기 위해서는 tips[i]는 클수록 좋고, 순서(i)는 작을수록 좋기 때문에 팁이 큰 사람부터 앞에 세우는 게 유리함
+* 팁을 내림차순으로 정렬한 뒤 순서대로 팁을 누적하였음
+* 계산 결과가 음수면 받을 팁이 없으니까 0으로 처리함
+
+#### 시간 복잡도
+* 정렬 : O(N log N)
+* 순회 : O(N)
+
+#### 다른 사람 풀이에서 배운 점
+```python
+import sys
+
+input = sys.stdin.readline
+
+
+def main(arr):
+    arr.sort(reverse=True)
+    res = 0
+    for i in range(len(arr)):
+        t = arr[i] - i
+        res += t if t >= 0 else 0
+    return res
+
+
+if __name__ == "__main__":
+    MAP = [int(input()) for _ in range(int(input()))]
+    print(main(MAP))
+```
+* 같은 로직이라도 `main(arr)`처럼 함수로 분리하면 구조가 더 깔끔하고 재사용이나 테스트가 용이해짐
+* `res += t if t>=0 else 0`처럼 삼향 연산자로 음수 처리 로직을 간결하게 작성할 수도 있다
+* 또는 `ans += max(tip, 0)`으로 접근
+* 다음에는 입력/처리/출력을 역할별로 나눠서 함수화하는 연습도 해봐야겠다
