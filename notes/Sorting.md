@@ -210,4 +210,4 @@ for i in range(len(count)):
 
 ## References
 
-[![YouTube](https://img.shields.io/badge/YouTube-%EC%9D%B4%EC%BD%94%ED%85%8C%20%EA%B0%95%EC%9D%98-808080?logo=youtube&logoColor=FFFFFF&labelColor=FF0000)](https://www.youtube.com/@dongbinna)
+[![YouTube](https://img.shields.io/badge/YouTube-%EC%9D%B4%EC%BD%94%ED%85%8C%20%EA%B0%95%EC%9D%98-808080?logo=youtube&logoColor=FFFFFF&labelColor=FF0000)]([https://www.youtube.com/@dongbinna](https://youtu.be/KGyK-pNvWos?si=rXBYR-6BhubOmPIy))
