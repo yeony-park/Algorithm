@@ -144,7 +144,7 @@ print(count_by_range(a, -1, 3))  # 6  → 값이 [-1, 3] 범위인 데이터 개
 
 ## More details
 
-[![Notion](https://img.shields.io/badge/Notion-Study%20Note-808080?logo=notion&logoColor=000000&labelColor=FFD700)](https://www.notion.so/3155e249d44e8017adfad89591dd12b1)
+[![Notion](https://img.shields.io/badge/Notion-Study%20Note-808080?logo=notion&logoColor=000000&labelColor=FFD700)](https://daily-archduke-be2.notion.site/3155e249d44e8017adfad89591dd12b1?source=copy_link)
 
 ## References
 
