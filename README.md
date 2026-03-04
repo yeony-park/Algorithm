@@ -8,8 +8,20 @@
 - ![Doing](https://img.shields.io/badge/Doing-7CB342?style=flat-square&logoColor=white)
   [Programmers ↗](./프로그래머스/) </br>
   : 프로그래머스 코딩테스트 연습 문제 풀이
-  
+
 </br>
+
+### 오답 유형
+
+| 오답 | 유형 | 설명 |
+|------|------|------|
+| `RE` | Runtime Error | 실행 중 예외 발생 (IndexError, ZeroDivisionError 등) |
+| `WA` | Wrong Answer | 로직 오류로 인한 오답 |
+| `TLE` | Time Limit Exceeded | 시간 초과, 알고리즘 최적화 필요 |
+| `MLE` | Memory Limit Exceeded | 메모리 초과 |
+
+</br>
+
 
 ### References
 - [![YouTube](https://img.shields.io/badge/YouTube-DongbinNa-lightgrey?style=flat-square&logo=youtube&logoColor=white&labelColor=FF0000)](https://youtube.com/@dongbi)
