@@ -33,3 +33,49 @@
 
  <p>조건에 따라 정렬하여 단어들을 출력한다.</p>
 
+---
+### 🔧 Fail log
+
+#### 접근 아이디어
+- 단어를 길이별로 분류하여 리스트에 저장
+- 길이별 리스트를 정렬 후 출력
+
+#### 알고리즘 판단 근거
+- 정렬 문제이므로 별도 알고리즘 불필요, 내장 sort 활용
+
+#### 시간 복잡도
+- 시간복잡도 : `O(n log n)`
+
+---
+### 오답
+#### 오답 유형
+- RE
+- 초기 코드는 다음과 같았다
+```python
+import sys
+
+input = sys.stdin.readline
+
+n = int(input())
+words = [[] for _ in range(50)]
+
+for _ in range(n):
+    w = input()
+    if w not in words[len(w)]:
+        words[len(w)].append(w)
+
+for w in words:
+    w.sort()
+
+for w in words:
+    if w != []:
+        print("".join(w).strip())
+```
+
+#### 해결 방법
+- `input().strip()` 으로 `\n` 제거
+- 처음엔 이미 단어가 존재한다면 if 조건으로 처리했으나, 최종 코드에서는 `set`을 사용해 중복을 제거했다.
+- 과도한 for 반복문 대신 `sorted(key=lambda x: (len(x), x))`으로 길이순, 사전순 정렬을 한 번에 처리했다.
+
+#### 개선할 점
+- `print('\n'.join(words))`로 print를 반복 호출하지 않고 한 번에 출력할 수 있다
