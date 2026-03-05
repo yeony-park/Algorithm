@@ -32,3 +32,38 @@
 
  <p>각 테스트 케이스마다 한 줄에 주어진 통나무들로 만들 수 있는 최소 난이도를 출력하시오.</p>
 
+---
+### ✅ Solve log
+
+#### 접근 아이디어
+* 가장 큰 값을 가운데에 배치하는 것이 좋겠다
+* 그러기 위해서 `sort` 함수로 내림차순 정렬 후, 홀짝 인덱스를 기준으로 리스트의 앞/뒤에 `insert`와 `append`를 교대로 삽입하면 인접한 값 간의 차이가 최소화되지 않을까?
+
+#### 아쉬운 점 / 개선할 사안
+1. `result`리스트 제거를 하면 메모리를 절약할 수 있다
+   ```python
+   print(max(abs(tmp[i] - tmp[(i+1) % len(tmp)]) for i in range(len(tmp))))
+   ```
+2. `deque`로 앞쪽 삽입 성능 개선
+   - `list.insert(0,val)`은 매번 전체 리스트를 한 칸씩 밀어서 삽입하기 때문에 O(n) * N번 = O(n²)의 시간복잡도나 된다
+   - `deque.appendleft()`는 O(1)이기 때문에 O(1) * N번 = O(n)
+   ```python
+   from collections import deque
+
+   tmp = deque()
+   for i, val in enumerate(a):
+       if i % 2 == 0:
+           tmp.append(val)
+       else:
+           tmp.appendleft(val)
+   ```
+
+#### 복잡도
+
+| 구분 | 기존 | 개선 후 |
+|------|------|---------|
+| 정렬 | O(n log n) | O(n log n) |
+| 배치 | O(n²) (`list.insert`) | O(n) (`deque.appendleft`) |
+| 정답 계산 | O(n) | O(n) |
+| **전체** | **O(n²)** | **O(n log n)** |
+| 공간 | O(n) (result 리스트) | O(1) |
