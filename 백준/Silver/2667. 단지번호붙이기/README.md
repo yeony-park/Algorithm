@@ -28,3 +28,61 @@
 
  <p>첫 번째 줄에는 총 단지수를 출력하시오. 그리고 각 단지내 집의 수를 오름차순으로 정렬하여 한 줄에 하나씩 출력하시오.</p>
 
+---
+### ✅ Solve log
+
+#### 접근 아이디어
+* 2차원 배열에서 `1`인 칸을 발견하면 DFS로 연결된 영역 전체를 탐색
+* DFS 탐색 시 방문한 칸을 `0`으로 덮어써서 재방문 방지
+* DFS가 반환하는 값에 자기 자신(`1`)을 더하면 한 덩어리의 집 개수가 합산됨
+* for문 순회 중 DFS 호출 시 재귀가 완전히 끝난 뒤 다음 인덱스로 넘어가므로 이미 방문한 덩어리는 `0`으로 소멸되어 중복 카운트가 발생하지 않는다
+
+### 복잡도
+
+| 구분 | 복잡도 |
+|------|--------|
+| 시간 | O(n²) — 모든 칸을 한 번씩 방문 |
+| 공간 | O(n²) — 재귀 스택 최대 깊이 |
+
+#### 아쉬운 점 / 개선할 사안
+
+* 처음엔 라벨링 방식으로 접근했었다
+  ```python
+  import sys
+  from collections import Counter
+  
+  input = sys.stdin.readline
+  sys.setrecursionlimit(10**6)
+  
+  n = int(input())
+  graph = [list(map(int, input().strip())) for _ in range(n)]
+  
+  label = 2
+  
+  def dfs(x,y,label):
+      if x <= -1 or x >= n or y <=-1 or y >= n:
+          return
+  
+      if graph[x][y] == 1:
+          graph[x][y] = label
+  
+          dfs(x-1,y, label)
+          dfs(x, y-1, label)
+          dfs(x+1,y, label)
+          dfs(x,y+1, label)
+  
+  for i in range(n):
+      for j in range(n):
+          if graph[i][j] == 1:
+              dfs(i,j,label)
+              label += 1
+  
+  flat = [v for row in graph for v in row if v >= 2]
+  counter = Counter(flat)
+  
+  print(len(counter))
+  for lab, cnt in sorted(counter.items()):
+    print(cnt)
+  ```
+* DFS 반환값으로 집 개수를 직접 합산하는 방식이 더 간결하다고 판단하여 최종코드로 제출함
+* `global label` 없이 label을 인자로 넘기는 방식도 있으나, 애초에 라벨링이 불필요한 문제였음!
