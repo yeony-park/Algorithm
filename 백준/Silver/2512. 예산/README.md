@@ -35,3 +35,106 @@
 
  <p>첫째 줄에는 배정된 예산들 중 최댓값인 정수를 출력한다. </p>
 
+---
+
+### 🔧 Fail log
+
+#### 접근 아이디어
+- 전체 예산 합이 총 예산 이하라면 최대 요청액이 곧 상한선
+- 그렇지 않다면, `budget // n` 으로 초기 상한선을 추정하고 이분탐색으로 상한선 이하 / 이상 그룹을 나눠 상한선을 계산
+
+#### 알고리즘 판단 근거
+- 상한선을 기준으로 배열을 두 구간으로 나눌 수 있으므로 `bisect` 활용 가능하다고 판단
+- 정렬 후 이분탐색: `O(n log n)`
+
+#### 시간 복잡도
+- 시간복잡도: `O(n log n)`
+
+
+---
+
+### 오답
+
+#### 오답 유형
+- WA (Wrong Answer)
+
+#### 초기 코드 (1차 시도)
+```python
+import sys
+from bisect import bisect_right
+
+input = sys.stdin.readline
+
+n = int(input())
+requests = list(map(int, input().split()))
+requests.sort()
+budget = int(input())
+
+total = sum(requests)
+ideal = budget//n
+
+if total <= budget:
+    answer = max(requests)
+else:
+    idx = bisect_right(requests, ideal)
+    left = requests[:idx]
+    right = requests[idx:]
+    answer = (budget-sum(left))//len(right)
+
+print(answer)
+```
+
+#### 오답 원인
+
+- 초기 상한선 추정값 `ideal = budget // n` 이 실제 정답보다 작을 수 있음.
+- 예시:
+```
+4
+1 2 3 100
+budget = 10
+```
+- `ideal = 10 // 4 = 2`
+- `bisect_right([1,2,3,100], 2)` → idx=2
+- `left=[1,2]`, `right=[3,100]`
+- `answer = (10-3) // 2 = 3`
+
+실제 정답은 `4`가 나온다.
+
+- `budget // n`은 예산을 n등분한 하한일 뿐 실제 상한선의 상한이 아니었다.  
+- 작은 요청액이 많을수록 남은 예산이 커져 실제 상한선은 `budget // n` 보다 높아질 수 있다
+
+---
+### 해결 방법
+- 상한선 후보 범위를 `0 ~ max(requests)`로 잡고, `total_cost(cap) <= budget`을 만족하는 최대 `cap`을 이진탐색으로 탐색
+- `budget // n`으로 상한선을 고정시키는 대신, 상한선 값 자체를 탐색 대상으로 바꿔서 해결하였음
+- `total_cost(cap) <= budget`이면 `answer`를 갱신하고 상한선을 더 높여볼 수 있으므로 `start = cap + 1`, 초과하면 `end = cap - 1`로 범위를 좁힘
+
+---
+### 다른 사람 풀이에서 배운 점
+
+이진탐색 대신 **그리디**로도 동일하게 풀 수 있다.
+- 정렬된 배열을 앞에서부터 순회하면서, 매 단계마다 남은 예산을 남은 지방 수로 나눠 상한선을 재계산함  
+- 현재 요청액이 상한선 이하면 그대로 지급하고 예산을 차감, 초과하면 그 상한선이 정답.
+
+```python
+budgets.sort()
+for i in range(total_regions):
+    limit = total_budget // (total_regions - i)
+    if budgets[i] <= limit:
+        total_budget -= budgets[i]
+    else:
+        print(limit)
+        exit()
+print(budgets[-1])
+```
+
+- 내 첫 번째 접근과 아이디어는 동일했지만 핵심 차이는 **상한선을 매 단계마다 재계산한다는 것**이었음
+- `budget // n`을 고정으로 사용하지 않고 `total_budget // (total_regions - i)`으로 계산하여 앞에서 적게 요청한 지방을 처리할수록 남은 예산이 정확히 반영되어 상한선이 올바르게 수렴할 수 있었음
+
+**복잡도 비교**
+| 풀이 | 시간복잡도 |
+|------|-----------|
+| 그리디 | `O(n log n)` |
+| 이진탐색 | `O(n log m)`|
+
+- 이 문제의 제약조건(n, m ≤ 10,000)에서는 사실상 동일함
