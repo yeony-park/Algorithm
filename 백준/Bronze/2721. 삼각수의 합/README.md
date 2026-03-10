@@ -34,3 +34,33 @@
 
  <p>각 테스트 케이스에 대해 W(n)을 한 줄에 하나씩 출력한다.</p>
 
+---
+### ✅ Solve log
+#### 아쉬운 점 / 개선할 사안
+- 처음에 Sum[k=1..n; k*T(k+1)]에 대한 이해를 잘못해서 calculate_Wn에 T(n) = 1+ ... + n값을 `tn`값으로 설정하고 인자로 넘겼다. 그래서 T(k+1)이 k마다 갱신되지 않는 문제가 있었다
+- T(k+1) = (k+1)(k+2)/2 공식을 적용했다면 더 간결하게 접근이 가능했을텐데 제출 후에 생각났다.
+- W(n)을 반복적으로 계산하는 구조인데, 바텀업 DP 방식으로 메모이제이션을 적용하면 O(n^2)이 O(n+T)로 개선이 가능할 것이다
+
+#### 개선된 코드
+```python
+import sys
+input = sys.stdin.readline
+
+T = int(input())
+cases = [int(input()) for _ in range(T)]
+max_n = max(cases)
+
+# W(n) 미리 다 계산
+W = [0] * (max_n + 1)
+for i in range(1, max_n + 1):
+    W[i] = W[i-1] + i * ((i+1)*(i+2)//2)
+
+for n in cases:
+    print(W[n])
+```
+
+#### 복잡도
+
+- 최초 풀이 : O(T * n²)
+- 공식 적용 후 : O(T * n)
+- 메모이제이션 적용 후 : O(max_n + T)
