@@ -2,5 +2,5 @@ import sys
 
 input = sys.stdin.readline
 
-text = list(input().split())
+text = input().split()
 print(len(text))
