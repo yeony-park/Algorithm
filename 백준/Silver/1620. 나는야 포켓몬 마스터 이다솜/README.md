@@ -136,3 +136,52 @@
 
 <p>이게 오박사님이 나에게 새로 주시려고 하는 도감이야. 너무 가지고 싶다ㅠㅜ. 꼭 만점을 받아줬으면 좋겠어!! 파이팅!!!</p>
 
+---
+### ✅ solve log
+#### 아이디어
+- 포켓몬 이름으로 번호를 찾는 경우와, 번호로 이름을 찾는 경우가 모두 필요했다
+- 처음에는 딕셔너리 하나만 사용해서 처리했더니 번호로 이름을 찾을 때 딕셔너리 전체를 순회해야 해서 시간 초과가 됐다
+
+#### 해결방법
+- `이름 -> 번호`, `번호 -> 이름` 역할을 하는 딕셔너리 두 개를 따로 만들어 각각 바로 조회할 수 있도록 수정하여 해결함
+
+#### 다른 사람의 코드에서 배운 점
+```python
+import sys
+input = sys.stdin.read
+
+def main():
+    data = input().splitlines()
+    
+    # 첫 번째 줄에서 N과 M을 파싱
+    N, M = map(int, data[0].split())
+    
+    # 두 딕셔너리 선언
+    num_to_name = {}
+    name_to_num = {}
+    
+    # N개의 포켓몬 이름 입력
+    for i in range(1, N + 1):
+        name = data[i]
+        num_to_name[i] = name
+        name_to_num[name] = i
+    
+    # M개의 문제 입력 처리
+    result = []
+    for j in range(N + 1, N + M + 1):
+        query = data[j]
+        if query.isdigit():  # 숫자인 경우
+            result.append(num_to_name[int(query)])
+        else:  # 문자인 경우
+            result.append(str(name_to_num[query]))
+    
+    # 결과 출력
+    sys.stdout.write("\n".join(result) + "\n")
+
+# 실행
+if __name__ == "__main__":
+    main()
+```
+- 변수명을 `poketmon`, `poketmon_num`이 아닌 `name_to_num`, `num_to_name`처럼 역할이 더 분명하게 드러나는 이름을 썼다면 가독성이 더 좋아졌을 것
+- 숫자 판별하는 문법이 생각이 안 나서 문자열로 변환하여 조건을 체크했다. `isdigit()` 기억해두기
+- `print()` 대신 `sys.stdin.write()`로 결과를 join해서 한 번에 출력하는 방법
