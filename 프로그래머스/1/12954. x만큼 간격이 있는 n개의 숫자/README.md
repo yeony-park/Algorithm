@@ -56,3 +56,8 @@
       </table>
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
+
+---
+### ✅ solve log
+#### 아쉬운 점
+-`list(range(x, x*n+1, x))` 로 더 간단하게 구현할 수 있다
