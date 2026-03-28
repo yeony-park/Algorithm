@@ -34,3 +34,45 @@
 
  <p>a를 b로 바꾸기 위해 필요한 최소 치환 횟수를 출력한다. 치환이 불가능한 경우는 –1을 출력한다.</p>
 
+---
+### ✅ solve log
+#### 아이디어
+- 단어를 정점, 바꿀 수 있는 쌍을 간선으로 보는 그래프 문제
+- 각 쌍은 서로 바꿀 수 있으므로 양방향 그래프로 구성
+- 시작 단어 `a`에서 `b`까지의 회소 변환 횟수를 구해야 하므로 BFS를 사용하였다
+- `distance` 배열을 -1로 초기화해서 방문 여부와 최단 거리 정보를 함께 관리
+
+#### 아쉬운 점/개선할 점
+- 처음에 쌍이라는 표현을 이해하지 못해서 단방향 그래프로 착각했다
+- b를 찾았을 때 dist 리스트에 따로 담아 `min(dixt)`를 구했으나, BFS에서는 처음 도달한 값이 곧 최단거리이기 때문에 distance[b]만 출력하면 되는 문제였다.
+```python3
+import sys
+from collections import deque
+
+input = sys.stdin.readline
+
+a, b = map(int, input().split())
+N, M = map(int, input().split())
+
+graph = [[] for _ in range(N + 1)]
+distance = [-1] * (N + 1)
+
+for _ in range(M):
+    n1, n2 = map(int, input().split())
+    graph[n1].append(n2)
+    graph[n2].append(n1)
+
+q = deque([a])
+distance[a] = 0
+
+while q:
+    now = q.popleft()
+
+    for nxt in graph[now]:
+        if distance[nxt] == -1:
+            distance[nxt] = distance[now] + 1
+            q.append(nxt)
+
+print(distance[b])
+```
+- dist 없애면 더 깔끔해짐
